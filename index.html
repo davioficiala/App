@@ -1,153 +1,451 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
 <meta charset="UTF-8">
-<title>UI Library</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mercado Inteligente</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #fff;
-  overflow-x: hidden;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#f5f5f5;
+overflow-x:hidden;
+-webkit-touch-callout:none;
+}
+
+/* BLOQUEAR IMAGEM */
+
+img{
+pointer-events:none;
+user-select:none;
+-webkit-user-drag:none;
 }
 
 /* MENU */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 25px;
-  border-bottom: 1px solid #eee;
-  background: #fff;
-  position: sticky;
-  top: 0;
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 30px;
+background:white;
+position:sticky;
+top:0;
+z-index:100;
+border-bottom:1px solid #eee;
+backdrop-filter:blur(10px);
 }
 
-.logo {
-  font-weight: bold;
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#16a34a;
 }
 
-.menu a {
-  margin-left: 15px;
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
+/* MENU LINKS */
+
+.menu{
+display:flex;
+gap:20px;
+}
+
+.menu a{
+text-decoration:none;
+color:#333;
+font-size:15px;
+font-weight:600;
+transition:0.3s;
+}
+
+.menu a:hover{
+color:#16a34a;
 }
 
 /* HERO */
-.hero {
-  text-align: center;
-  padding: 25px 20px 10px 20px;
+
+.hero{
+text-align:center;
+padding:60px 20px 20px;
 }
 
-.hero h1 {
-  font-size: 24px;
+.hero h1{
+font-size:46px;
+color:#111;
+margin-bottom:15px;
 }
 
-.hero p {
-  color: #666;
-  font-size: 14px;
-  margin-top: 8px;
+.hero p{
+font-size:18px;
+color:#666;
+max-width:700px;
+margin:auto;
+line-height:1.6;
 }
 
-/* FRASE NOVA */
-.tagline {
-  text-align: center;
-  font-size: 13px;
-  color: #999;
-  margin-bottom: 20px;
+/* TEXTO */
+
+.tagline{
+text-align:center;
+font-size:16px;
+color:#888;
+margin-top:10px;
+margin-bottom:35px;
+}
+
+/* BOTÕES */
+
+.buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-bottom:45px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:16px 32px;
+border-radius:18px;
+text-decoration:none;
+font-size:16px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.btn-primary{
+background:#16a34a;
+color:white;
+}
+
+.btn-primary:hover{
+background:#15803d;
+transform:translateY(-4px);
+}
+
+.btn-dark{
+background:#111;
+color:white;
+}
+
+.btn-dark:hover{
+transform:translateY(-4px);
 }
 
 /* CARROSSEL */
-.marquee {
-  overflow: hidden;
-  width: 100%;
-  padding: 30px 0;
+
+.marquee{
+overflow:hidden;
+width:100%;
+padding:20px 0 70px;
+position:relative;
 }
 
-.track {
-  display: flex;
-  width: max-content;
-  animation: scroll 18s linear infinite;
+.track{
+display:flex;
+width:max-content;
+animation:scroll 40s linear infinite;
+will-change:transform;
 }
 
-.group {
-  display: flex;
+.group{
+display:flex;
 }
 
 /* CARD */
-.card {
-  width: 240px;
-  height: 440px;
-  margin-right: 25px;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid #eee;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+
+.card{
+width:260px;
+height:520px;
+margin-right:25px;
+border-radius:28px;
+overflow:hidden;
+background:white;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+border:1px solid #eee;
+transition:0.3s;
+transform:translateZ(0);
+backface-visibility:hidden;
 }
 
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* CONTATO */
+
+.contato{
+background:white;
+padding:60px 20px;
+text-align:center;
+border-top:1px solid #eee;
+}
+
+.contato h2{
+font-size:40px;
+margin-bottom:15px;
+color:#111;
+}
+
+.contato p{
+font-size:18px;
+color:#666;
+margin-bottom:30px;
+}
+
+/* BOTÃO WHATS */
+
+.btn-whats{
+display:inline-block;
+padding:18px 38px;
+background:#25D366;
+color:white;
+text-decoration:none;
+font-size:20px;
+font-weight:bold;
+border-radius:20px;
+transition:0.3s;
+box-shadow:0 10px 25px rgba(37,211,102,0.3);
+}
+
+.btn-whats:hover{
+background:#1ebe5d;
+transform:scale(1.05);
+}
+
+/* FOOTER */
+
+.footer{
+padding:30px;
+text-align:center;
+font-size:14px;
+color:#888;
 }
 
 /* ANIMAÇÃO */
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+
+@keyframes scroll{
+
+0%{
+transform:translateX(0);
 }
+
+100%{
+transform:translateX(-50%);
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:34px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.card{
+width:220px;
+height:470px;
+}
+
+.menu{
+display:none;
+}
+
+.buttons{
+padding:0 15px;
+}
+
+.btn{
+width:100%;
+text-align:center;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <!-- MENU -->
+
 <div class="navbar">
-  <div class="logo">UI Library</div>
-  <div class="menu">
-    <a href="#">Home</a>
-    <a href="#">Apps</a>
-    <a href="#">Flows</a>
-    <a href="#">Salvar</a>
-  </div>
+
+<div class="logo">
+Mercado Inteligente
+</div>
+
+<div class="menu">
+<a href="#">Home</a>
+<a href="#">Telas</a>
+<a href="#">UX Design</a>
+<a href="#">Contato</a>
+</div>
+
 </div>
 
 <!-- HERO -->
+
 <div class="hero">
-  <h1>Design UX Interface Library</h1>
-  <p>Explore telas reais de apps estilo Mobbin</p>
+
+<h1>
+Design moderno para apps inteligentes
+</h1>
+
+<p>
+Explore telas premium de aplicativo com estilo EUA,
+UX avançado e interface moderna para startups,
+mercados inteligentes e apps com IA.
+</p>
+
 </div>
 
-<!-- FRASE NOVA -->
+<!-- FRASE -->
+
 <div class="tagline">
-  Desenvolvendo app • Telas • Criar ideias de interface moderna
+Desenvolvendo app • Telas modernas • Criando ideias de interface premium
+</div>
+
+<!-- BOTÕES -->
+
+<div class="buttons">
+
+<a href="#" class="btn btn-primary">
+Ver Projeto
+</a>
+
+<a href="#" class="btn btn-dark">
+Explorar UX
+</a>
+
 </div>
 
 <!-- CARROSSEL -->
+
 <div class="marquee">
-  <div class="track">
 
-    <div class="group">
-      <div class="card"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1556741533-f6acd647d2fb?w=600"></div>
-    </div>
+<div class="track">
 
-    <div class="group">
-      <div class="card"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1556741533-f6acd647d2fb?w=600"></div>
-    </div>
+<div class="group">
 
-  </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600">
 </div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600">
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600">
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600">
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600">
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1556741533-f6acd647d2fb?w=600">
+</div>
+
+</div>
+
+<div class="group">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600">
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600">
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600">
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600">
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600">
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1556741533-f6acd647d2fb?w=600">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CONTATO -->
+
+<div class="contato">
+
+<h2>
+Vamos criar seu app?
+</h2>
+
+<p>
+Entre em contato para desenvolver aplicativos,
+sites e sistemas inteligentes modernos.
+</p>
+
+<a href="https://wa.me/5599999999999" class="btn-whats">
+📲 Chamar no WhatsApp
+</a>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+© 2026 Mercado Inteligente • UI Design Premium
+</div>
+
+<script>
+
+/* BLOQUEAR MENU DIREITO */
+
+document.addEventListener("contextmenu", function(e){
+e.preventDefault();
+});
+
+/* BLOQUEAR ARRASTAR */
+
+document.addEventListener("dragstart", function(e){
+e.preventDefault();
+});
+
+</script>
 
 </body>
 </html>
