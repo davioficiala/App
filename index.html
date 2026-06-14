@@ -1,14 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Mobbin UI Clone</title>
 
 <style>
 
+/* RESET */
 *{
 margin:0;
 padding:0;
@@ -22,53 +22,106 @@ overflow-x:hidden;
 color:#111;
 }
 
-/* NAVBAR */
+/* =========================
+   TOPBAR (NOVO)
+========================= */
 
-.navbar{
+.topbar{
 position:sticky;
 top:0;
-z-index:100;
-padding:20px;
-}
-
-.nav-content{
-max-width:1200px;
-margin:auto;
-background:white;
-border-radius:999px;
-padding:18px 28px;
+z-index:999;
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
+padding:15px 20px;
+background:white;
 box-shadow:0 5px 20px rgba(0,0,0,0.05);
-border:1px solid #eee;
 }
 
-.logo{
+.menu-toggle{
 font-size:28px;
-font-weight:900;
+background:none;
+border:none;
+cursor:pointer;
 }
 
-.menu{
-display:flex;
-gap:15px;
+.search-box{
+flex:1;
+margin:0 15px;
 }
 
-.menu a{
+.search-box input{
+width:100%;
+padding:12px 15px;
+border-radius:20px;
+border:1px solid #ddd;
+outline:none;
+}
+
+.cart{
+font-size:26px;
+cursor:pointer;
+}
+
+/* OVERLAY */
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+opacity:0;
+visibility:hidden;
+transition:0.3s;
+z-index:998;
+}
+
+.overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+/* SIDE MENU */
+.side-menu{
+position:fixed;
+top:0;
+left:-100%;
+width:85%;
+max-width:400px;
+height:100%;
+background:white;
+z-index:999;
+padding:25px;
+transition:0.3s;
+box-shadow:10px 0 30px rgba(0,0,0,0.1);
+}
+
+.side-menu.active{
+left:0;
+}
+
+.side-menu h2{
+margin-bottom:20px;
+}
+
+.side-menu a{
+display:block;
+padding:12px 0;
 text-decoration:none;
 color:#111;
 font-weight:bold;
-font-size:15px;
 }
 
-.menu-btn{
-background:black;
-color:white;
-padding:14px 22px;
-border-radius:999px;
+.close{
+font-size:22px;
+cursor:pointer;
+margin-bottom:20px;
 }
 
-/* HERO */
+/* =========================
+   HERO (SEU ORIGINAL)
+========================= */
 
 .hero{
 position:relative;
@@ -77,26 +130,11 @@ text-align:center;
 overflow:hidden;
 }
 
-.hero p{
-font-size:32px;
-margin-bottom:15px;
-}
-
-.hero h1{
-font-size:90px;
-line-height:1;
-font-weight:900;
-margin-bottom:10px;
-}
-
-.hero h2{
-font-size:70px;
-font-weight:900;
-line-height:1.1;
-}
+.hero p{font-size:32px;margin-bottom:15px;}
+.hero h1{font-size:90px;line-height:1;font-weight:900;margin-bottom:10px;}
+.hero h2{font-size:70px;font-weight:900;line-height:1.1;}
 
 /* BOTÕES */
-
 .hero-buttons{
 display:flex;
 justify-content:center;
@@ -114,23 +152,12 @@ text-decoration:none;
 transition:0.3s;
 }
 
-.btn-black{
-background:black;
-color:white;
-}
+.btn-black{background:black;color:white;}
+.btn-white{background:white;color:black;border:1px solid #ddd;}
 
-.btn-white{
-background:white;
-color:black;
-border:1px solid #ddd;
-}
+.btn:hover{transform:translateY(-5px);}
 
-.btn:hover{
-transform:translateY(-5px);
-}
-
-/* FLOATING ICONS */
-
+/* ICONS */
 .icon{
 position:absolute;
 width:95px;
@@ -150,69 +177,22 @@ height:50px;
 object-fit:contain;
 }
 
-/* POSIÇÕES */
-
-.icon1{
-top:100px;
-left:8%;
-}
-
-.icon2{
-top:140px;
-right:10%;
-}
-
-.icon3{
-bottom:100px;
-left:18%;
-}
-
-.icon4{
-bottom:120px;
-right:15%;
-}
-
-.icon5{
-top:300px;
-left:45%;
-}
-
-/* ANIMAÇÃO */
+.icon1{top:100px;left:8%;}
+.icon2{top:140px;right:10%;}
+.icon3{bottom:100px;left:18%;}
+.icon4{bottom:120px;right:15%;}
+.icon5{top:300px;left:45%;}
 
 @keyframes float{
-
-0%{
-transform:translateY(0px);
-}
-
-50%{
-transform:translateY(-15px);
-}
-
-100%{
-transform:translateY(0px);
-}
-
+0%{transform:translateY(0px);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0px);}
 }
 
 /* CARROSSEL */
-
-.marquee{
-overflow:hidden;
-padding:40px 0 80px;
-}
-
-.track{
-display:flex;
-width:max-content;
-animation:scroll 35s linear infinite;
-}
-
-.group{
-display:flex;
-}
-
-/* CARD */
+.marquee{overflow:hidden;padding:40px 0 80px;}
+.track{display:flex;width:max-content;animation:scroll 35s linear infinite;}
+.group{display:flex;}
 
 .card{
 width:300px;
@@ -231,8 +211,12 @@ height:100%;
 object-fit:cover;
 }
 
-/* FEATURES */
+@keyframes scroll{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
 
+/* FEATURES */
 .features{
 max-width:1200px;
 margin:auto;
@@ -250,19 +234,10 @@ box-shadow:0 10px 25px rgba(0,0,0,0.05);
 border:1px solid #eee;
 }
 
-.feature h3{
-font-size:30px;
-margin:20px 0 15px;
-}
-
-.feature p{
-color:#666;
-line-height:1.7;
-font-size:17px;
-}
+.feature h3{font-size:30px;margin:20px 0 15px;}
+.feature p{color:#666;line-height:1.7;font-size:17px;}
 
 /* CTA */
-
 .cta{
 max-width:1000px;
 margin:0 auto 100px;
@@ -273,19 +248,8 @@ text-align:center;
 color:white;
 }
 
-.cta h2{
-font-size:55px;
-margin-bottom:20px;
-}
-
-.cta p{
-font-size:20px;
-color:#ccc;
-max-width:700px;
-margin:auto;
-line-height:1.6;
-margin-bottom:40px;
-}
+.cta h2{font-size:55px;margin-bottom:20px;}
+.cta p{font-size:20px;color:#ccc;max-width:700px;margin:auto;line-height:1.6;margin-bottom:40px;}
 
 .whats{
 display:inline-block;
@@ -296,15 +260,9 @@ text-decoration:none;
 color:white;
 font-size:22px;
 font-weight:bold;
-transition:0.3s;
-}
-
-.whats:hover{
-transform:scale(1.05);
 }
 
 /* FOOTER */
-
 .footer{
 padding:40px;
 text-align:center;
@@ -312,250 +270,137 @@ color:#777;
 font-size:14px;
 }
 
-/* ANIMAÇÃO CARROSSEL */
-
-@keyframes scroll{
-
-0%{
-transform:translateX(0);
-}
-
-100%{
-transform:translateX(-50%);
-}
-
-}
-
 /* MOBILE */
-
 @media(max-width:768px){
-
-.hero h1{
-font-size:55px;
-}
-
-.hero h2{
-font-size:45px;
-}
-
-.hero p{
-font-size:22px;
-}
-
-.card{
-width:240px;
-height:500px;
-}
-
-.menu{
-display:none;
-}
-
-.icon{
-width:70px;
-height:70px;
-}
-
-.icon img{
-width:35px;
-height:35px;
-}
-
+.hero h1{font-size:55px;}
+.hero h2{font-size:45px;}
+.hero p{font-size:22px;}
+.card{width:240px;height:500px;}
+.icon{width:70px;height:70px;}
+.icon img{width:35px;height:35px;}
 }
 
 </style>
-
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- TOPBAR -->
+<div class="topbar">
 
-<div class="navbar">
+<button class="menu-toggle" onclick="openMenu()">☰</button>
 
-<div class="nav-content">
-
-<div class="logo">
-appmobile 
+<div class="search-box">
+<input type="text" placeholder="Buscar produtos...">
 </div>
 
-<div class="menu">
-<a href="#">Home</a>
-<a href="#">Apps</a>
-<a href="#">Flows</a>
-<a href="#" class="menu-btn">Sign Up</a>
-</div>
+<div class="cart">🛒</div>
 
 </div>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<!-- SIDE MENU -->
+<div class="side-menu" id="sideMenu">
+
+<div class="close" onclick="closeMenu()">✖</div>
+
+<h2>Menu</h2>
+
+<a href="#">🏠 Home</a>
+<a href="#">📱 Apps</a>
+<a href="#">💰 Vendas</a>
+<a href="#">📦 Produtos</a>
+<a href="#">⚙️ Configurações</a>
 
 </div>
 
 <!-- HERO -->
-
 <section class="hero">
 
-<!-- ICONS -->
+<div class="icon icon1"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png"></div>
+<div class="icon icon2"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968520.png"></div>
+<div class="icon icon3"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png"></div>
+<div class="icon icon4"><img src="https://cdn-icons-png.flaticon.com/512/732/732212.png"></div>
+<div class="icon icon5"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968866.png"></div>
 
-<div class="icon icon1">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png">
-</div>
-
-<div class="icon icon2">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968520.png">
-</div>
-
-<div class="icon icon3">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png">
-</div>
-
-<div class="icon icon4">
-<img src="https://cdn-icons-png.flaticon.com/512/732/732212.png">
-</div>
-
-<div class="icon icon5">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968866.png">
-</div>
-
-<p>
-A growing library of
-</p>
-
-<h1>
-1.704 apps
-</h1>
-
-<h2>
-588.100 screens
-</h2>
-
-<h2>
-135.100 flows
-</h2>
+<p>A growing library of</p>
+<h1>1.704 apps</h1>
+<h2>588.100 screens</h2>
+<h2>135.100 flows</h2>
 
 <div class="hero-buttons">
-
-<a href="#" class="btn btn-black">
-Explore now →
-</a>
-
-<a href="#" class="btn btn-white">
-Try for free
-</a>
-
+<a href="#" class="btn btn-black">Explore now →</a>
+<a href="#" class="btn btn-white">Try for free</a>
 </div>
 
 </section>
 
 <!-- CARROSSEL -->
-
 <div class="marquee">
-
 <div class="track">
 
 <div class="group">
-
-<div class="card">
-<img src="https://raw.githubusercontent.com/davioficiala/App/main/f1db6fc1-8938-449f-9584-2a8f90941ea3.png">
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800">
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800">
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800">
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1556741533-f6acd647d2fb?w=800">
-</div>
-
+<div class="card"><img src="https://raw.githubusercontent.com/davioficiala/App/main/f1db6fc1-8938-449f-9584-2a8f90941ea3.png"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1556741533-f6acd647d2fb?w=800"></div>
 </div>
 
 <div class="group">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800">
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800">
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800">
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800">
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1556741533-f6acd647d2fb?w=800">
+<div class="card"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1556741533-f6acd647d2fb?w=800"></div>
 </div>
 
 </div>
-
-</div>
-
 </div>
 
 <!-- FEATURES -->
-
 <section class="features">
 
 <div class="feature">
 <h3>✨ Premium UI</h3>
-<p>
-Design moderno inspirado em startups e apps dos EUA.
-</p>
+<p>Design moderno inspirado em startups e apps dos EUA.</p>
 </div>
 
 <div class="feature">
 <h3>🚀 UX Avançado</h3>
-<p>
-Experiência premium com animações suaves e interface moderna.
-</p>
+<p>Experiência premium com animações suaves.</p>
 </div>
 
 <div class="feature">
 <h3>📱 Mobile First</h3>
-<p>
-Totalmente responsivo para celular, tablet e desktop.
-</p>
+<p>Totalmente responsivo para celular e desktop.</p>
 </div>
 
 </section>
 
 <!-- CTA -->
-
 <section class="cta">
-
-<h2>
-Vamos criar seu app?
-</h2>
-
-<p>
-Crie aplicativos modernos com IA,
-UX premium e design estilo Mobbin.
-</p>
-
-<a href="https://wa.me/5599999999999" class="whats">
-📲 Chamar no WhatsApp
-</a>
-
+<h2>Vamos criar seu app?</h2>
+<p>Crie aplicativos modernos com IA e UX premium.</p>
+<a href="https://wa.me/5599999999999" class="whats">📲 WhatsApp</a>
 </section>
 
 <!-- FOOTER -->
+<div class="footer">© 2026 Mobbin UI Clone</div>
 
-<div class="footer">
-© 2026 Mobbin UI Clone • Premium UX Design
-</div>
+<script>
+function openMenu(){
+document.getElementById("sideMenu").classList.add("active");
+document.getElementById("overlay").classList.add("active");
+}
+
+function closeMenu(){
+document.getElementById("sideMenu").classList.remove("active");
+document.getElementById("overlay").classList.remove("active");
+}
+</script>
 
 </body>
 </html>
-
